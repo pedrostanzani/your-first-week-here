@@ -11,12 +11,19 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Loader2 } from "lucide-react";
 
 interface GetStartedModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSubmit: (data: { email: string; name?: string }) => Promise<void>;
+  onSubmit: (data: { email: string; name?: string; role?: string }) => Promise<void>;
 }
 
 export function GetStartedModal({
@@ -26,6 +33,7 @@ export function GetStartedModal({
 }: GetStartedModalProps) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [role, setRole] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -41,9 +49,14 @@ export function GetStartedModal({
 
     setIsLoading(true);
     try {
-      await onSubmit({ email, name: name.trim() || undefined });
+      await onSubmit({ 
+        email, 
+        name: name.trim() || undefined,
+        role: role || undefined
+      });
       setEmail("");
       setName("");
+      setRole("");
     } catch {
       setError("Oops! Something went wrong. Please try again.");
     } finally {
@@ -93,6 +106,34 @@ export function GetStartedModal({
               className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-white/20 focus-visible:border-white/20"
               disabled={isLoading}
             />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="role" className="text-white/80">
+              What role are you joining in?
+            </Label>
+            <Select value={role} onValueChange={setRole} disabled={isLoading}>
+              <SelectTrigger 
+                id="role"
+                className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:ring-white/20 focus:border-white/20"
+              >
+                <SelectValue placeholder="Select your role" />
+              </SelectTrigger>
+              <SelectContent className="bg-[#1a1a1a] border-white/10">
+                <SelectItem value="Engineering" className="text-white focus:bg-white/10 focus:text-white">
+                  Engineering
+                </SelectItem>
+                <SelectItem value="Design" className="text-white focus:bg-white/10 focus:text-white">
+                  Design
+                </SelectItem>
+                <SelectItem value="Sales" className="text-white focus:bg-white/10 focus:text-white">
+                  Sales
+                </SelectItem>
+                <SelectItem value="Operations" className="text-white focus:bg-white/10 focus:text-white">
+                  Operations
+                </SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {error && <p className="text-sm text-red-400">{error}</p>}

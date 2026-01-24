@@ -6,6 +6,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 interface SendWelcomeRequest {
   email: string;
   name?: string;
+  role?: string;
 }
 
 interface SendWelcomeResponse {
@@ -19,7 +20,7 @@ export async function POST(
 ): Promise<NextResponse<SendWelcomeResponse>> {
   try {
     const body = (await request.json()) as SendWelcomeRequest;
-    const { email, name } = body;
+    const { email, name, role } = body;
 
     // Validate email
     if (!email || typeof email !== "string") {
@@ -39,16 +40,17 @@ export async function POST(
     }
 
     const greeting = name?.trim() || "there";
+    const roleText = role ? ` in ${role}` : "";
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: "Your Onboarding Buddy <onboarding@yourfirstweekhere.com>",
+      from: "Your Onboarding Buddy <onboarding@fwh.pedrostanzani.com>",
       to: email,
       subject: "Welcome to Resend! Your First Week Starts Now 🚀",
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
           <h1>Hello ${greeting}!</h1>
-          <p>Welcome to your first week! We're excited to have you here.</p>
+          <p>Welcome to your first week${roleText}! We're excited to have you here.</p>
           <p>This is a hello world email - your personalized onboarding content will be coming soon!</p>
           <br />
           <p>Best,<br />Your Onboarding Buddy</p>
