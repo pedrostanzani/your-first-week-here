@@ -1,0 +1,311 @@
+{
+  "company": [
+    {
+      "title": "How dogfooding shapes our product",
+      "path": "/handbook/company/how-dogfooding-shapes-our-product",
+      "slug": "how-dogfooding-shapes-our-product"
+    },
+    {
+      "title": "How to facilitate a project",
+      "path": "/handbook/company/how-to-facilitate-a-project",
+      "slug": "how-to-facilitate-a-project"
+    },
+    {
+      "title": "How we got here",
+      "path": "/handbook/company/how-we-got-here",
+      "slug": "how-we-got-here"
+    },
+    {
+      "title": "How we innovate by experimenting",
+      "path": "/handbook/company/how-we-bring-innovation-through-experiments",
+      "slug": "how-we-bring-innovation-through-experiments"
+    },
+    {
+      "title": "How we make money",
+      "path": "/handbook/company/how-we-make-money",
+      "slug": "how-we-make-money"
+    },
+    {
+      "title": "How we talk to each other",
+      "path": "/handbook/company/how-we-talk-to-each-other",
+      "slug": "how-we-talk-to-each-other"
+    },
+    {
+      "title": "What are our rituals",
+      "path": "/handbook/company/what-are-our-rituals",
+      "slug": "what-are-our-rituals"
+    },
+    {
+      "title": "What inspires us",
+      "path": "/handbook/company/what-inspires-us",
+      "slug": "what-inspires-us"
+    },
+    {
+      "title": "What we believe",
+      "path": "/handbook/company/what-we-believe",
+      "slug": "what-we-believe"
+    },
+    {
+      "title": "Why We Exist",
+      "path": "/handbook/company/why-we-exist",
+      "slug": "why-we-exist"
+    }
+  ],
+  "design": [
+    {
+      "title": "How to work with the design team",
+      "path": "/handbook/design/how-to-work-with-design-team",
+      "slug": "how-to-work-with-design-team"
+    },
+    {
+      "title": "How we think about design",
+      "path": "/handbook/design/how-we-think-about-design",
+      "slug": "how-we-think-about-design"
+    },
+    {
+      "title": "What are our brand guidelines",
+      "path": "/handbook/design/what-are-our-brand-guidelines",
+      "slug": "what-are-our-brand-guidelines"
+    },
+    {
+      "title": "What is our design process",
+      "path": "/handbook/design/what-is-our-design-process",
+      "slug": "what-is-our-design-process"
+    },
+    {
+      "title": "Whats The Role Of Design At Resend",
+      "path": "/handbook/design/whats-the-role-of-design-at-resend",
+      "slug": "whats-the-role-of-design-at-resend"
+    }
+  ],
+  "engineering": [
+    {
+      "title": "How we approach CI/CD",
+      "path": "/handbook/engineering/how-we-approach-ci-cd",
+      "slug": "how-we-approach-ci-cd"
+    },
+    {
+      "title": "How we handle incidents",
+      "path": "/handbook/engineering/how-we-handle-incidents",
+      "slug": "how-we-handle-incidents"
+    },
+    {
+      "title": "How we handle on-call rotations",
+      "path": "/handbook/engineering/how-we-handle-on-call-rotations",
+      "slug": "how-we-handle-on-call-rotations"
+    },
+    {
+      "title": "How we handle post incident reviews",
+      "path": "/handbook/engineering/how-we-handle-post-incident-reviews",
+      "slug": "how-we-handle-post-incident-reviews"
+    },
+    {
+      "title": "How we handle pull requests",
+      "path": "/handbook/engineering/how-we-handle-pull-requests",
+      "slug": "how-we-handle-pull-requests"
+    },
+    {
+      "title": "How we plan our cycles",
+      "path": "/handbook/engineering/how-we-plan-our-cycles",
+      "slug": "how-we-plan-our-cycles"
+    },
+    {
+      "title": "How we separate deploy and release",
+      "path": "/handbook/engineering/how-we-separate-deployments-from-releases",
+      "slug": "how-we-separate-deployments-from-releases"
+    },
+    {
+      "title": "How we ship new features",
+      "path": "/handbook/engineering/how-we-ship-new-features",
+      "slug": "how-we-ship-new-features"
+    },
+    {
+      "title": "How we use RFCs",
+      "path": "/handbook/engineering/how-we-use-rfcs",
+      "slug": "how-we-use-rfcs"
+    },
+    {
+      "title": "What Is Our Tech Stack",
+      "path": "/handbook/engineering/what-is-our-tech-stack",
+      "slug": "what-is-our-tech-stack"
+    },
+    {
+      "title": "Who is \"The Fixer\"?",
+      "path": "/handbook/engineering/who-is-the-fixer",
+      "slug": "who-is-the-fixer"
+    }
+  ],
+  "marketing": [
+    {
+      "title": "How We Approach Marketing",
+      "path": "/handbook/marketing/how-we-approach-marketing",
+      "slug": "how-we-approach-marketing"
+    },
+    {
+      "title": "How we keep momentum",
+      "path": "/handbook/marketing/how-we-keep-momentum",
+      "slug": "how-we-keep-momentum"
+    },
+    {
+      "title": "How we think about our website",
+      "path": "/handbook/marketing/how-we-think-about-our-website",
+      "slug": "how-we-think-about-our-website"
+    },
+    {
+      "title": "How we think about social",
+      "path": "/handbook/marketing/how-we-approach-social",
+      "slug": "how-we-approach-social"
+    },
+    {
+      "title": "How we think about swag",
+      "path": "/handbook/marketing/how-we-think-about-swag",
+      "slug": "how-we-think-about-swag"
+    },
+    {
+      "title": "How we think about YouTube",
+      "path": "/handbook/marketing/how-we-think-about-youtube",
+      "slug": "how-we-think-about-youtube"
+    },
+    {
+      "title": "How we write customer stories",
+      "path": "/handbook/marketing/how-we-write-customer-stories",
+      "slug": "how-we-write-customer-stories"
+    },
+    {
+      "title": "What are the most common use cases",
+      "path": "/handbook/marketing/what-are-the-most-common-use-cases",
+      "slug": "what-are-the-most-common-use-cases"
+    },
+    {
+      "title": "What is our brand's voice and tone",
+      "path": "/handbook/marketing/what-is-our-brands-voice-and-tone",
+      "slug": "what-is-our-brands-voice-and-tone"
+    }
+  ],
+  "people": [
+    {
+      "title": "How the onboarding works",
+      "path": "/handbook/people/how-the-onboarding-works",
+      "slug": "how-the-onboarding-works"
+    },
+    {
+      "title": "How to give feedback",
+      "path": "/handbook/people/how-to-give-feedback",
+      "slug": "how-to-give-feedback"
+    },
+    {
+      "title": "How to lead a brainstorm",
+      "path": "/handbook/people/how-to-lead-a-brainstorm",
+      "slug": "how-to-lead-a-brainstorm"
+    },
+    {
+      "title": "How to spend money",
+      "path": "/handbook/people/how-to-spend-money",
+      "slug": "how-to-spend-money"
+    },
+    {
+      "title": "How to take time off",
+      "path": "/handbook/people/how-to-take-time-off",
+      "slug": "how-to-take-time-off"
+    },
+    {
+      "title": "How we hire",
+      "path": "/handbook/people/how-we-hire",
+      "slug": "how-we-hire"
+    },
+    {
+      "title": "How we recognize peers",
+      "path": "/handbook/people/how-we-recognize-peers",
+      "slug": "how-we-recognize-peers"
+    },
+    {
+      "title": "How we think about remote work",
+      "path": "/handbook/people/how-we-think-about-remote-work",
+      "slug": "how-we-think-about-remote-work"
+    },
+    {
+      "title": "How we think about titles",
+      "path": "/handbook/people/how-we-think-about-titles",
+      "slug": "how-we-think-about-titles"
+    },
+    {
+      "title": "How We Work",
+      "path": "/handbook/people/how-we-work",
+      "slug": "how-we-work"
+    },
+    {
+      "title": "What are the benefits",
+      "path": "/handbook/people/what-are-the-benefits",
+      "slug": "what-are-the-benefits"
+    },
+    {
+      "title": "What is the travel policy",
+      "path": "/handbook/people/what-is-the-travel-policy",
+      "slug": "what-is-the-travel-policy"
+    },
+    {
+      "title": "Why we have a \"meeting-free day\"",
+      "path": "/handbook/people/why-we-have-a-meeting-free-day",
+      "slug": "why-we-have-a-meeting-free-day"
+    }
+  ],
+  "sales": [
+    {
+      "title": "How to expand, upsell and cross-sell",
+      "path": "/handbook/sales/how-to-expand-upsell-and-cross-sell",
+      "slug": "how-to-expand-upsell-and-cross-sell"
+    },
+    {
+      "title": "How We Think About Buyer Experience",
+      "path": "/handbook/sales/how-we-think-about-buyer-experience",
+      "slug": "how-we-think-about-buyer-experience"
+    },
+    {
+      "title": "What is our sales philosophy",
+      "path": "/handbook/sales/what-is-our-sales-philosophy",
+      "slug": "what-is-our-sales-philosophy"
+    },
+    {
+      "title": "What is our sales stack",
+      "path": "/handbook/sales/what-is-our-sales-stack",
+      "slug": "what-is-our-sales-stack"
+    },
+    {
+      "title": "What's the role of sales at Resend",
+      "path": "/handbook/sales/what-is-the-role-of-sales-at-resend",
+      "slug": "what-is-the-role-of-sales-at-resend"
+    }
+  ],
+  "success": [
+    {
+      "title": "How we evolve our knowledge base",
+      "path": "/handbook/success/how-we-evolve-our-knowledge-base",
+      "slug": "how-we-evolve-our-knowledge-base"
+    },
+    {
+      "title": "How we help users",
+      "path": "/handbook/success/how-we-help-users",
+      "slug": "how-we-help-users"
+    },
+    {
+      "title": "How we receive feedback",
+      "path": "/handbook/success/how-we-receive-feedback",
+      "slug": "how-we-receive-feedback"
+    },
+    {
+      "title": "How we scale support",
+      "path": "/handbook/success/how-we-scale-support",
+      "slug": "how-we-scale-support"
+    },
+    {
+      "title": "What is our philosophy for anti-abuse",
+      "path": "/handbook/success/what-is-our-philosophy-for-anti-abuse",
+      "slug": "what-is-our-philosophy-for-anti-abuse"
+    },
+    {
+      "title": "What Is Our Vision For Exceptional Support",
+      "path": "/handbook/success/what-is-our-vision-for-exceptional-support",
+      "slug": "what-is-our-vision-for-exceptional-support"
+    }
+  ]
+}
