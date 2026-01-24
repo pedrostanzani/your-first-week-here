@@ -44,6 +44,9 @@ interface OnboardingState {
   // Progress tracking
   progressSteps: ProgressStep[];
 
+  // Initial chat prompt (for "Ask for help" feature)
+  initialChatPrompt: string | null;
+
   // Actions
   setUserInfo: (name: string, role: string, goals?: string) => void;
   setPlan: (plan: OnboardingPlan) => void;
@@ -57,6 +60,7 @@ interface OnboardingState {
   addProgressStep: (step: Omit<ProgressStep, "id" | "timestamp">) => void;
   updateProgressStep: (id: string, updates: Partial<ProgressStep>) => void;
   clearProgress: () => void;
+  setInitialChatPrompt: (prompt: string | null) => void;
   reset: () => void;
 }
 
@@ -70,6 +74,7 @@ const initialState = {
   isGenerating: false,
   error: null,
   progressSteps: [] as ProgressStep[],
+  initialChatPrompt: null as string | null,
 };
 
 export const useOnboardingStore = create<OnboardingState>()(
@@ -141,6 +146,8 @@ export const useOnboardingStore = create<OnboardingState>()(
       },
 
       clearProgress: () => set({ progressSteps: [] }),
+
+      setInitialChatPrompt: (prompt) => set({ initialChatPrompt: prompt }),
 
       reset: () => set(initialState),
     }),

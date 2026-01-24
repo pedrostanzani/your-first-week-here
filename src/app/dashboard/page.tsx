@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -14,12 +15,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import {
   Sparkles,
   Calendar,
   CheckCircle2,
   Circle,
   ArrowRight,
   MoreVertical,
+  MoreHorizontal,
   ChevronLeft,
   ChevronRight,
   ChevronDown,
@@ -27,6 +38,9 @@ import {
   Loader2,
   Check,
   ExternalLink,
+  MessageCircle,
+  HelpCircle,
+  PartyPopper,
 } from "lucide-react";
 import type { ToolResultSummary } from "@/stores/onboarding-store";
 import { useOnboardingStore } from "@/stores/onboarding-store";
@@ -154,6 +168,7 @@ function ToolResultDisplay({ result }: { result: ToolResultSummary }) {
 }
 
 export default function DashboardPage() {
+  const router = useRouter();
   const {
     userName,
     plan,
@@ -173,6 +188,7 @@ export default function DashboardPage() {
     addProgressStep,
     updateProgressStep,
     clearProgress,
+    setInitialChatPrompt,
     reset,
   } = useOnboardingStore();
 
@@ -181,6 +197,12 @@ export default function DashboardPage() {
 
   // Track if the "Plan built" section is expanded
   const [isPlanBuiltExpanded, setIsPlanBuiltExpanded] = useState(true);
+
+  // Day completion feedback dialog state
+  const [feedbackDialogOpen, setFeedbackDialogOpen] = useState(false);
+  const [feedbackText, setFeedbackText] = useState("");
+  const [isSubmittingFeedback, setIsSubmittingFeedback] = useState(false);
+  const [completedDays, setCompletedDays] = useState<Set<number>>(new Set());
 
   const toggleStepExpanded = (stepId: string) => {
     setExpandedSteps((prev) => {
@@ -192,6 +214,38 @@ export default function DashboardPage() {
       }
       return next;
     });
+  };
+
+  const handleAskForHelp = (task: {
+    title: string;
+    description: string;
+    handbookArticle?: { slug: string; title: string };
+    githubIssue?: { number: number; title: string; url: string };
+    githubPR?: { number: number; title: string; url: string };
+  }) => {
+    let prompt = `I need help with this task of my onboarding program:\n\n**${task.title}**\n${task.description}`;
+    
+    // Add relevant links
+    const links: string[] = [];
+    if (task.handbookArticle) {
+      links.push(`- Handbook article: "${task.handbookArticle.title}" (${getHandbookUrl(task.handbookArticle.slug)})`);
+    }
+    if (task.githubIssue) {
+      links.push(`- GitHub Issue #${task.githubIssue.number}: "${task.githubIssue.title}" (${task.githubIssue.url})`);
+    }
+    if (task.githubPR) {
+      links.push(`- GitHub PR #${task.githubPR.number}: "${task.githubPR.title}" (${task.githubPR.url})`);
+    }
+    
+    if (links.length > 0) {
+      prompt += `\n\nRelated resources:\n${links.join("\n")}`;
+    }
+    
+    setInitialChatPrompt(prompt);
+    // Small delay to ensure store state is set before navigation
+    setTimeout(() => {
+      router.push("/chat");
+    }, 50);
   };
 
   const generatePlan = useCallback(async () => {
@@ -336,7 +390,53 @@ export default function DashboardPage() {
 
   const handleReset = () => {
     reset();
+    setCompletedDays(new Set());
   };
+
+  const handleSubmitFeedback = async () => {
+    if (!plan) return;
+    
+    setIsSubmittingFeedback(true);
+    
+    try {
+      const currentDayData = plan.days.find((d) => d.day === currentDay);
+      const dayTasks = currentDayData?.tasks || [];
+      const completedTasksForDay = dayTasks.filter((task) =>
+        completedTasks.includes(task.id)
+      );
+
+      const response = await fetch("/api/send-daily-summary", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: userName || "Pedro",
+          dayNumber: currentDay,
+          dayTitle: currentDayData?.title || `Day ${currentDay}`,
+          feedback: feedbackText,
+          completedTasks: completedTasksForDay.map((t) => ({
+            title: t.title,
+            description: t.description,
+          })),
+          totalTasks: dayTasks.length,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send summary");
+      }
+
+      // Mark day as completed
+      setCompletedDays((prev) => new Set([...prev, currentDay]));
+      setFeedbackDialogOpen(false);
+      setFeedbackText("");
+    } catch (err) {
+      console.error("Failed to submit feedback:", err);
+    } finally {
+      setIsSubmittingFeedback(false);
+    }
+  };
+
+  const isDayCompleted = completedDays.has(currentDay);
 
   const displayName = userName || "Pedro";
 
@@ -566,13 +666,42 @@ export default function DashboardPage() {
                       return (
                         <div
                           key={task.id}
-                          className={`flex items-start gap-3 p-3 rounded-lg transition-colors cursor-pointer ${
+                          className={`relative flex items-start gap-3 p-3 rounded-lg transition-colors cursor-pointer ${
                             isCompleted
                               ? "bg-green-500/10 hover:bg-green-500/15 border border-green-950"
                               : "border hover:bg-neutral-900/20"
                           }`}
                           onClick={() => toggleTaskCompletion(task.id)}
                         >
+                          {/* Task action dropdown */}
+                          <div className="absolute top-2 right-2">
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <button
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="p-1 rounded hover:bg-white/10 text-white/40 hover:text-white/70 transition-colors"
+                                >
+                                  <MoreHorizontal className="w-4 h-4" />
+                                </button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent
+                                align="end"
+                                className="w-48 bg-[#1a1a1a] border-white/10"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <DropdownMenuItem
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleAskForHelp(task);
+                                  }}
+                                  className="text-white focus:bg-white/10 focus:text-white cursor-pointer"
+                                >
+                                  <HelpCircle className="mr-2 h-4 w-4" />
+                                  Ask for help
+                                </DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                          </div>
                           <div className="mt-0.5">
                             {isCompleted ? (
                               <CheckCircle2 className="w-4 h-4 text-green-400" />
@@ -580,7 +709,7 @@ export default function DashboardPage() {
                               <Circle className="w-4 h-4 text-white/30 hover:text-white/50" />
                             )}
                           </div>
-                          <div className="flex-1">
+                          <div className="flex-1 pr-6">
                             <p
                               className={`text-sm font-medium ${
                                 isCompleted
@@ -718,6 +847,43 @@ export default function DashboardPage() {
                   </Card>
                 )}
 
+                {/* Day Completion Card */}
+                <Card className={cn(
+                  "bg-[#0a0a0a] border-white/10 p-6",
+                  isDayCompleted && "border-green-500/30 bg-green-500/5"
+                )}>
+                  <div className="flex items-center gap-4">
+                    <div className={cn(
+                      "w-10 h-10 rounded-full flex items-center justify-center",
+                      isDayCompleted ? "bg-green-500/20" : "bg-white/10"
+                    )}>
+                      {isDayCompleted ? (
+                        <PartyPopper className="w-5 h-5 text-green-400" />
+                      ) : (
+                        <CheckCircle2 className="w-5 h-5 text-white/60" />
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-white font-semibold">
+                        {isDayCompleted ? "Day completed!" : "How did it go?"}
+                      </h3>
+                      <p className="text-[#a1a1a1] text-sm">
+                        {isDayCompleted
+                          ? "Great job! You've completed your tasks for today."
+                          : "Done with today's tasks? Mark the day as complete and share your feedback."}
+                      </p>
+                    </div>
+                    {!isDayCompleted && (
+                      <Button
+                        onClick={() => setFeedbackDialogOpen(true)}
+                        className="bg-white text-black hover:bg-white/90 font-medium"
+                      >
+                        Mark as completed
+                      </Button>
+                    )}
+                  </div>
+                </Card>
+
               </div>
             );
           })()}
@@ -755,6 +921,16 @@ export default function DashboardPage() {
               Next Day
             </DropdownMenuItem>
             <DropdownMenuSeparator className="bg-white/10" />
+            <DropdownMenuItem asChild>
+              <Link
+                href="/chat"
+                className="text-white focus:bg-white/10 focus:text-white cursor-pointer"
+              >
+                <MessageCircle className="mr-2 h-4 w-4" />
+                Chat with Assistant
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-white/10" />
             <DropdownMenuItem
               onClick={handleReset}
               className="text-red-400 focus:bg-red-500/10 focus:text-red-400 cursor-pointer"
@@ -765,6 +941,50 @@ export default function DashboardPage() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
+      {/* Day Completion Feedback Dialog */}
+      <Dialog open={feedbackDialogOpen} onOpenChange={setFeedbackDialogOpen}>
+        <DialogContent className="bg-[#0a0a0a] border-white/10 text-white">
+          <DialogHeader>
+            <DialogTitle className="text-white">How did Day {currentDay} go?</DialogTitle>
+            <DialogDescription className="text-[#a1a1a1]">
+              Share any feedback about your onboarding experience today. This is optional.
+            </DialogDescription>
+          </DialogHeader>
+          <Textarea
+            placeholder="What went well? Any challenges or suggestions?"
+            value={feedbackText}
+            onChange={(e) => setFeedbackText(e.target.value)}
+            className="min-h-[120px] bg-white/5 border-white/10 text-white placeholder:text-white/40 focus-visible:ring-white/20"
+          />
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setFeedbackDialogOpen(false);
+                setFeedbackText("");
+              }}
+              className="border-white/10 text-white hover:bg-white/10"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSubmitFeedback}
+              disabled={isSubmittingFeedback}
+              className="bg-white text-black hover:bg-white/90"
+            >
+              {isSubmittingFeedback ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                "Complete Day"
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </main>
   );
 }
