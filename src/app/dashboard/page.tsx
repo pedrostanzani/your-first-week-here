@@ -30,6 +30,7 @@ import {
 import type { ToolResultSummary } from "@/stores/onboarding-store";
 import { useOnboardingStore } from "@/stores/onboarding-store";
 import handbookLinks from "@/constants/handbook-links.json";
+import { cn } from "@/lib/utils";
 
 // Build a slug to path lookup for handbook articles
 const handbookSlugToPath: Record<string, string> = {};
@@ -176,6 +177,9 @@ export default function DashboardPage() {
 
   // Track which progress steps are expanded to show results
   const [expandedSteps, setExpandedSteps] = useState<Set<string>>(new Set());
+
+  // Track if the "Plan built" section is expanded
+  const [isPlanBuiltExpanded, setIsPlanBuiltExpanded] = useState(true);
 
   const toggleStepExpanded = (stepId: string) => {
     setExpandedSteps((prev) => {
@@ -411,8 +415,16 @@ export default function DashboardPage() {
         {/* Progress Card - shows during generation and on day 1 only */}
         {progressSteps.length > 0 && (isGenerating || currentDay === 1) && (
           <div className="space-y-4 mb-6">
-            <Card className="bg-[#0a0a0a] border-white/10 p-6 gap-2">
-              <div className="flex items-center gap-3 mb-6">
+            <Card className={
+              cn(
+                "bg-[#0a0a0a] border-white/10 p-6 gap-2 transition-colors",
+                !isPlanBuiltExpanded && "hover:bg-white/5"
+              )
+            }>
+              <div
+                className={`flex items-center gap-3 ${isPlanBuiltExpanded ? "mb-6" : ""} ${!isGenerating ? "cursor-pointer -mx-2 px-2 py-1 rounded transition-colors" : ""}`}
+                onClick={() => !isGenerating && setIsPlanBuiltExpanded(!isPlanBuiltExpanded)}
+              >
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                   {isGenerating ? (
                     <Loader2 className="w-5 h-5 text-white animate-spin" />
@@ -420,7 +432,7 @@ export default function DashboardPage() {
                     <Check className="w-5 h-5 text-green-400" />
                   )}
                 </div>
-                <div>
+                <div className="flex-1">
                   <h3 className="text-white font-semibold">
                     {isGenerating ? "Building your plan" : "Plan built"}
                   </h3>
@@ -430,10 +442,15 @@ export default function DashboardPage() {
                       : "Click on any step to see what Ray found"}
                   </p>
                 </div>
+                {!isGenerating && (
+                  <ChevronDown
+                    className={`w-5 h-5 text-[#666] transition-transform ${isPlanBuiltExpanded ? "rotate-180" : ""}`}
+                  />
+                )}
               </div>
 
               {/* Progress Steps */}
-              <div className="space-y-2">
+              {isPlanBuiltExpanded && <div className="space-y-2">
                 {progressSteps.map((step) => {
                   const hasResult = step.result && step.status === "complete";
                   const isExpanded = expandedSteps.has(step.id);
@@ -501,7 +518,7 @@ export default function DashboardPage() {
                     <Skeleton className="h-4 w-48" />
                   </div>
                 )}
-              </div>
+              </div>}
             </Card>
 
             {isGenerating && (
