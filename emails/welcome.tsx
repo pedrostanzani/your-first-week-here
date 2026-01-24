@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Html,
   Head,
@@ -10,107 +10,107 @@ import {
   Link,
   Tailwind,
   Hr,
-} from '@react-email/components';
+  Img,
+  Button,
+} from "@react-email/components";
 
-interface WelcomeEmailProps {
-  firstName?: string;
-  companyName?: string;
-}
+const WelcomeEmail = (props: {
+  firstName: string;
+  companyName: string;
+  baseUrl?: string;
+}) => {
+  // Use absolute URL for production, fallback for development
+  const baseUrl =
+    props.baseUrl ||
+    process.env.NEXT_PUBLIC_BASE_URL ||
+    "http://localhost:3000";
 
-const WelcomeEmail = ({
-  firstName = 'Sarah',
-  companyName = 'Resend',
-}: WelcomeEmailProps) => {
   return (
     <Html lang="en" dir="ltr">
       <Tailwind>
         <Head />
         <Body className="bg-black font-sans py-[40px]">
-          <Container className="max-w-[600px] mx-auto bg-[#0a0a0a] border border-white border-opacity-10">
+          <Container 
+            className="max-w-[600px] mx-auto bg-[#0a0a0a]"
+            style={{ border: '1px solid #212121' }}
+          >
+            {/* Hero Image */}
+            <Img
+              src={`${baseUrl}/new-york.png`}
+              alt="New York City skyline at night"
+              width="600"
+              height="250"
+              style={{
+                width: "100%",
+                height: "250px",
+                objectFit: "cover",
+                display: "block",
+              }}
+            />
+
             {/* Hero Section */}
-            <Section className="px-[48px] pt-[48px] pb-[32px]">
-              <Heading className="text-white text-[36px] font-serif font-bold leading-[42px] m-0 mb-[24px]">
-                Welcome to {companyName}, {firstName}!
+            <Section className="px-[48px] pt-[32px] pb-[32px]">
+              <Heading className="text-white leading-snug text-[36px] font-serif font-bold m-0 mb-[24px]">
+                It's your first week here, {props.firstName}!
               </Heading>
+              <Text className="text-[#d4d4d4] text-[16px] leading-[24px] m-0 mb-[12px]">
+                And we're lucky to have you.
+              </Text>
               <Text className="text-[#d4d4d4] text-[16px] leading-[24px] m-0">
-                I'm Oscar, your AI onboarding buddy. I'll guide you through your first week and answer any questions you have along the way.
+                I'm Ray, your onboarding buddy. Let's get you set up!
               </Text>
             </Section>
 
             {/* Today's Focus Card */}
             <Section className="px-[48px] mb-[40px]">
-              <div className="bg-[#151516] border border-white border-opacity-10 rounded-[8px] p-[32px]">
+              <div 
+                className="bg-[#151516] rounded-[8px] p-[16px]"
+                style={{ border: '1px solid #212121' }}
+              >
                 <Heading className="text-white text-[20px] font-sans font-semibold m-0 mb-[24px]">
-                  Today's Focus (Day 1)
+                  Our mission today
                 </Heading>
 
                 <div className="space-y-[16px]">
                   <Text className="text-[#d4d4d4] text-[15px] leading-[22px] m-0 flex items-start">
                     <span className="mr-[12px]">📚</span>
-                    Explore the Resend dashboard and API documentation
-                  </Text>
-                  <Text className="text-[#d4d4d4] text-[15px] leading-[22px] m-0 flex items-start">
-                    <span className="mr-[12px]">👥</span>
-                    Join #general on Slack and introduce yourself to the team
-                  </Text>
-                  <Text className="text-[#d4d4d4] text-[15px] leading-[22px] m-0 flex items-start">
-                    <span className="mr-[12px]">💻</span>
-                    Set up your development environment and local Resend instance
-                  </Text>
-                  <Text className="text-[#d4d4d4] text-[15px] leading-[22px] m-0 flex items-start">
-                    <span className="mr-[12px]">🤝</span>
-                    Schedule 1-on-1s with your team leads and engineering buddy
+                    We'll go through the engineering principles and processes
+                    together. I summarized the top docs for you to get up to
+                    speed in no time.
                   </Text>
                 </div>
               </div>
             </Section>
 
-            {/* Contact Section */}
-            <Section className="px-[48px] pb-[32px]">
-              <Heading className="text-white text-[18px] font-sans font-semibold m-0 mb-[16px]">
-                How to Reach Oscar
-              </Heading>
-              <Text className="text-[#d4d4d4] text-[15px] leading-[22px] m-0 mb-[12px]">
-                Have questions? I'm here to help.
-              </Text>
-              <Text className="text-white text-[18px] font-mono font-medium m-0 mb-[12px] tracking-wide">
-                <Link href="mailto:oscar@resend.com" className="text-white no-underline">
-                  oscar@resend.com
-                </Link>
-              </Text>
-              <Text className="text-[#a1a1a1] text-[14px] leading-[20px] m-0">
-                You can email me anytime, or just reply to this email. I respond within 24 hours.
-              </Text>
-            </Section>
-
-            {/* Divider */}
-            <Section className="px-[48px] mb-[32px]">
-              <Hr className="border-white border-opacity-10 m-0" />
-            </Section>
-
-            {/* Closing */}
-            <Section className="px-[48px] pb-[48px]">
-              <Text className="text-[#d4d4d4] text-[15px] leading-[22px] m-0 mb-[24px]">
-                You're going to do amazing things here at {companyName}. I'm excited to be part of your journey, and I'm here whenever you need guidance or have questions.
-              </Text>
-              <Text className="text-[#d4d4d4] text-[15px] leading-[22px] m-0 mb-[8px]">
-                Welcome to the team!
-              </Text>
-              <Text className="text-[#a1a1a1] text-[14px] leading-[20px] m-0">
-                - Oscar, Your AI Onboarding Buddy
-              </Text>
+            {/* Button linking to the platform */}
+            <Section className="px-[48px] mb-[40px]">
+              <Button
+                href={`${baseUrl}/dashboard`}
+                style={{
+                  background: '#ffffff',
+                  backgroundColor: '#ffffff',
+                  color: '#000000',
+                  fontSize: '16px',
+                  fontWeight: '700',
+                  textDecoration: 'none',
+                  textAlign: 'center',
+                  display: 'block',
+                  padding: '16px 40px',
+                  borderRadius: '8px',
+                  lineHeight: '100%',
+                }}
+              >
+                Let's get started
+              </Button>
             </Section>
 
             {/* Footer */}
-            <Section className="px-[48px] pb-[32px] border-t border-white border-opacity-10 pt-[32px]">
+            <Section 
+              className="px-[48px] pb-[32px] pt-[32px]"
+              style={{ borderTop: '1px solid #212121' }}
+            >
               <Text className="text-[#a1a1a1] text-[12px] leading-[16px] m-0 text-center">
-                {companyName} • San Francisco, CA
-              </Text>
-              <Text className="text-[#a1a1a1] text-[12px] leading-[16px] m-0 text-center mt-[8px]">
-                <Link href="#" className="text-[#a1a1a1] underline">
-                  Unsubscribe
-                </Link>
-                {' '}• © 2026 {companyName}
+                Your First Week Here
               </Text>
             </Section>
           </Container>
@@ -121,8 +121,9 @@ const WelcomeEmail = ({
 };
 
 WelcomeEmail.PreviewProps = {
-  firstName: 'Alex',
-  companyName: 'Resend',
+  firstName: "Pedro",
+  companyName: "Resend",
+  baseUrl: "http://localhost:3000",
 };
 
 export default WelcomeEmail;

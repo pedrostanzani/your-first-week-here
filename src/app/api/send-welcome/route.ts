@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import WelcomeEmail from "../../../../emails/welcome";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -39,23 +40,25 @@ export async function POST(
       );
     }
 
-    const greeting = name?.trim() || "there";
-    const roleText = role ? ` in ${role}` : "";
+    const firstName = name?.trim() || "there";
+    
+    // Get the base URL for absolute image paths in emails
+    const baseUrl =
+      process.env.NEXT_PUBLIC_BASE_URL ||
+      process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : "http://localhost:3000";
 
-    // Send email using Resend
+    // Send email using Resend with React Email template
     const { data, error } = await resend.emails.send({
       from: "Your Onboarding Buddy <onboarding@fwh.pedrostanzani.com>",
       to: email,
-      subject: "Welcome to Resend! Your First Week Starts Now 🚀",
-      html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-          <h1>Hello ${greeting}!</h1>
-          <p>Welcome to your first week${roleText}! We're excited to have you here.</p>
-          <p>This is a hello world email - your personalized onboarding content will be coming soon!</p>
-          <br />
-          <p>Best,<br />Your Onboarding Buddy</p>
-        </div>
-      `,
+      subject: "It's your first week here! 🌃",
+      react: WelcomeEmail({
+        firstName,
+        companyName: "Resend",
+        baseUrl,
+      }),
     });
 
     if (error) {
