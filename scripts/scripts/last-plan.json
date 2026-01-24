@@ -1,0 +1,321 @@
+{
+  "employeeName": "Pedro",
+  "role": "Software Engineer",
+  "createdAt": "2026-01-24T18:57:58.353Z",
+  "welcomeMessage": "Welcome to Resend, Pedro! 🎉 We're thrilled to have you join our engineering team. Over the next 5 days, you'll dive deep into our company culture, engineering practices, and get hands-on with our codebase. This plan is designed to help you feel confident and ready to make meaningful contributions. Remember, everyone here is excited to help you succeed - don't hesitate to ask questions!",
+  "days": [
+    {
+      "day": 1,
+      "title": "Welcome to Resend - Company Foundations",
+      "summary": "Get oriented with Resend's mission, values, and culture. Understand why we exist and how we communicate as a team.",
+      "tasks": [
+        {
+          "id": "day1-task1",
+          "title": "Discover why Resend exists",
+          "description": "Read about our company mission and the problem we're solving in the email infrastructure space. This will give you context for all the technical decisions we make.",
+          "type": "reading",
+          "estimatedMinutes": 15,
+          "priority": "high",
+          "handbookArticle": {
+            "slug": "why-we-exist",
+            "title": "Why We Exist"
+          }
+        },
+        {
+          "id": "day1-task2",
+          "title": "Learn our core values and beliefs",
+          "description": "Understand the principles that guide our decision-making and team culture. These values influence how we write code, review PRs, and collaborate.",
+          "type": "reading",
+          "estimatedMinutes": 20,
+          "priority": "high",
+          "handbookArticle": {
+            "slug": "what-we-believe",
+            "title": "What we believe"
+          }
+        },
+        {
+          "id": "day1-task3",
+          "title": "Understand how we communicate",
+          "description": "Learn our communication norms, tools, and etiquette. This includes Slack usage, meeting culture, and how we share updates.",
+          "type": "reading",
+          "estimatedMinutes": 15,
+          "priority": "high",
+          "handbookArticle": {
+            "slug": "how-we-talk-to-each-other",
+            "title": "How we talk to each other"
+          }
+        },
+        {
+          "id": "day1-task4",
+          "title": "Schedule your first 1:1 with your manager",
+          "description": "Reach out to your engineering manager to schedule a 30-minute 1:1 for later this week. Come prepared with questions about the team, your role, and any initial thoughts.",
+          "type": "meeting",
+          "estimatedMinutes": 30,
+          "priority": "high"
+        },
+        {
+          "id": "day1-task5",
+          "title": "Set up your development environment",
+          "description": "Get your local development environment set up. Clone the react-email repository, install dependencies, and make sure you can run the project locally. Ask your buddy for help if needed.",
+          "type": "task",
+          "estimatedMinutes": 60,
+          "priority": "medium"
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "title": "Engineering Deep Dive - Our Tech & Processes",
+      "summary": "Dive deep into our engineering practices, tech stack, and development workflows. Learn how we build and ship software.",
+      "tasks": [
+        {
+          "id": "day2-task1",
+          "title": "Explore our tech stack",
+          "description": "Learn about the technologies, frameworks, and tools we use. Understand the architecture decisions and why we chose each technology.",
+          "type": "reading",
+          "estimatedMinutes": 25,
+          "priority": "high",
+          "handbookArticle": {
+            "slug": "what-is-our-tech-stack",
+            "title": "What Is Our Tech Stack"
+          }
+        },
+        {
+          "id": "day2-task2",
+          "title": "Master our pull request process",
+          "description": "Understand how we handle code reviews, PR guidelines, and our merge process. This is crucial for contributing effectively to the codebase.",
+          "type": "reading",
+          "estimatedMinutes": 20,
+          "priority": "high",
+          "handbookArticle": {
+            "slug": "how-we-handle-pull-requests",
+            "title": "How we handle pull requests"
+          }
+        },
+        {
+          "id": "day2-task3",
+          "title": "Learn our CI/CD approach",
+          "description": "Understand our continuous integration and deployment pipeline. Learn how code goes from your local machine to production.",
+          "type": "reading",
+          "estimatedMinutes": 20,
+          "priority": "high",
+          "handbookArticle": {
+            "slug": "how-we-approach-ci-cd",
+            "title": "How we approach CI/CD"
+          }
+        },
+        {
+          "id": "day2-task4",
+          "title": "Understand how we ship features",
+          "description": "Learn our feature development lifecycle, from ideation to deployment. Understand how we separate deployments from releases.",
+          "type": "reading",
+          "estimatedMinutes": 15,
+          "priority": "medium",
+          "handbookArticle": {
+            "slug": "how-we-ship-new-features",
+            "title": "How we ship new features"
+          }
+        },
+        {
+          "id": "day2-task5",
+          "title": "Explore the codebase structure",
+          "description": "Spend time navigating the react-email repository. Understand the folder structure, key files, and how different packages are organized. Take notes on questions to ask your buddy.",
+          "type": "exploration",
+          "estimatedMinutes": 90,
+          "priority": "medium"
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "title": "Team Collaboration & Workflows",
+      "summary": "Meet your teammates, understand how we work together, and learn about our planning and communication rituals.",
+      "tasks": [
+        {
+          "id": "day3-task1",
+          "title": "Learn how we work as a team",
+          "description": "Understand our remote work culture, collaboration principles, and how we maintain team cohesion across different time zones.",
+          "type": "reading",
+          "estimatedMinutes": 15,
+          "priority": "high",
+          "handbookArticle": {
+            "slug": "how-we-work",
+            "title": "How We Work"
+          }
+        },
+        {
+          "id": "day3-task2",
+          "title": "Understand our planning cycles",
+          "description": "Learn how we plan our work, set priorities, and organize our development cycles. This will help you understand how your work fits into the bigger picture.",
+          "type": "reading",
+          "estimatedMinutes": 20,
+          "priority": "high",
+          "handbookArticle": {
+            "slug": "how-we-plan-our-cycles",
+            "title": "How we plan our cycles"
+          }
+        },
+        {
+          "id": "day3-task3",
+          "title": "Meet your engineering buddy",
+          "description": "Have a 45-minute coffee chat with your assigned engineering buddy. Ask about their experience, get tips for success, and discuss any questions about the codebase or processes.",
+          "type": "meeting",
+          "estimatedMinutes": 45,
+          "priority": "high"
+        },
+        {
+          "id": "day3-task4",
+          "title": "Join the team standup",
+          "description": "Attend your first engineering team standup. Listen to how the team shares updates and ask to introduce yourself briefly. Take notes on current projects and priorities.",
+          "type": "meeting",
+          "estimatedMinutes": 30,
+          "priority": "high"
+        },
+        {
+          "id": "day3-task5",
+          "title": "Learn about our rituals",
+          "description": "Understand our team rituals, recurring meetings, and cultural practices. Know what to expect and how to participate.",
+          "type": "reading",
+          "estimatedMinutes": 10,
+          "priority": "medium",
+          "handbookArticle": {
+            "slug": "what-are-our-rituals",
+            "title": "What are our rituals"
+          }
+        }
+      ]
+    },
+    {
+      "day": 4,
+      "title": "Hands-on Exploration & Learning",
+      "summary": "Get hands-on with the codebase, review recent pull requests, and start identifying your first contribution opportunity.",
+      "tasks": [
+        {
+          "id": "day4-task1",
+          "title": "Review recent pull requests",
+          "description": "Look at 3-5 recently merged PRs to understand code quality standards, review comments, and common patterns. Pay attention to how feedback is given and received.",
+          "type": "exploration",
+          "estimatedMinutes": 60,
+          "priority": "high"
+        },
+        {
+          "id": "day4-task2",
+          "title": "Run the test suite",
+          "description": "Execute the full test suite locally. Understand our testing approach, see what types of tests we have, and make sure everything passes in your environment.",
+          "type": "task",
+          "estimatedMinutes": 30,
+          "priority": "high"
+        },
+        {
+          "id": "day4-task3",
+          "title": "Explore current open issues",
+          "description": "Browse through open GitHub issues to understand common problems users face, feature requests, and areas where the team needs help. This will help you identify contribution opportunities.",
+          "type": "exploration",
+          "estimatedMinutes": 45,
+          "priority": "medium"
+        },
+        {
+          "id": "day4-task4",
+          "title": "Learn about incident handling",
+          "description": "Understand how we handle production issues, our on-call process, and post-incident reviews. Even as a new engineer, it's good to know our reliability practices.",
+          "type": "reading",
+          "estimatedMinutes": 15,
+          "priority": "medium",
+          "handbookArticle": {
+            "slug": "how-we-handle-incidents",
+            "title": "How we handle incidents"
+          }
+        },
+        {
+          "id": "day4-task5",
+          "title": "Set up your first issue",
+          "description": "Review the suggested first issue about adding Open Graph meta tags to the website. Read through the issue description, understand the requirements, and ask your buddy any clarifying questions.",
+          "type": "task",
+          "estimatedMinutes": 30,
+          "priority": "high",
+          "githubIssue": {
+            "number": 2856,
+            "title": "Website is missing Open Graph meta tags (broken social previews)",
+            "url": "https://github.com/resend/react-email/issues/2856"
+          }
+        }
+      ]
+    },
+    {
+      "day": 5,
+      "title": "First Contribution & Looking Ahead",
+      "summary": "Make your first code contribution, get it reviewed, and plan your continued learning and growth at Resend.",
+      "tasks": [
+        {
+          "id": "day5-task1",
+          "title": "Start working on your first issue",
+          "description": "Begin implementing the fix for the Open Graph meta tags issue. Create a branch, make the necessary changes, and test your implementation locally. Don't worry about perfection - focus on getting a working solution.",
+          "type": "contribution",
+          "estimatedMinutes": 120,
+          "priority": "high",
+          "githubIssue": {
+            "number": 2856,
+            "title": "Website is missing Open Graph meta tags (broken social previews)",
+            "url": "https://github.com/resend/react-email/issues/2856"
+          }
+        },
+        {
+          "id": "day5-task2",
+          "title": "Create your first pull request",
+          "description": "Open a PR with your changes. Write a clear description, reference the issue, and request review from your buddy. Follow the PR template and guidelines you learned earlier.",
+          "type": "contribution",
+          "estimatedMinutes": 30,
+          "priority": "high"
+        },
+        {
+          "id": "day5-task3",
+          "title": "Reflect on your onboarding experience",
+          "description": "Take time to reflect on your first week. What went well? What was challenging? Prepare feedback for your manager about the onboarding process and any suggestions for improvement.",
+          "type": "task",
+          "estimatedMinutes": 20,
+          "priority": "medium"
+        },
+        {
+          "id": "day5-task4",
+          "title": "Plan your next learning goals",
+          "description": "Based on your first week, identify 2-3 areas you want to focus on learning more about. This could be specific technologies, domain knowledge, or processes. Discuss these with your manager.",
+          "type": "task",
+          "estimatedMinutes": 30,
+          "priority": "medium"
+        },
+        {
+          "id": "day5-task5",
+          "title": "Celebrate your first week!",
+          "description": "You've made it through your first week at Resend! Share a brief update in the team channel about your experience and what you're excited to work on next. The team loves hearing from new members.",
+          "type": "task",
+          "estimatedMinutes": 15,
+          "priority": "low"
+        }
+      ]
+    }
+  ],
+  "suggestedFirstIssue": {
+    "number": 2856,
+    "title": "Website is missing Open Graph meta tags (broken social previews)",
+    "url": "https://github.com/resend/react-email/issues/2856",
+    "reason": "This is a great first issue because it's well-defined, involves frontend work that will help you get familiar with the website codebase, and has clear acceptance criteria. It's impactful (improves social sharing) but low-risk, making it perfect for getting your first contribution merged while learning our development workflow."
+  },
+  "keyContacts": [
+    {
+      "role": "Engineering Manager",
+      "purpose": "Your direct manager who will guide your technical growth and help with any questions about processes or priorities"
+    },
+    {
+      "role": "Senior Engineer (Buddy)",
+      "purpose": "Your assigned buddy who will help with day-to-day questions, code reviews, and technical mentorship"
+    },
+    {
+      "role": "DevOps Engineer",
+      "purpose": "Can help with deployment processes, CI/CD pipeline questions, and infrastructure setup"
+    },
+    {
+      "role": "Product Manager",
+      "purpose": "Will help you understand product priorities, user needs, and how engineering decisions impact customers"
+    }
+  ]
+}

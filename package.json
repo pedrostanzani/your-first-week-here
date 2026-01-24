@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "email": "email dev --port 3001",
-    "mastra": "mastra dev"
+    "mastra": "mastra dev",
+    "test:plan": "bun run scripts/test-generate-plan.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.23",
@@ -48,7 +49,8 @@
     "resend": "^6.8.0",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "zustand": "^5.0.10"
   },
   "devDependencies": {
     "@react-email/preview-server": "^5.2.5",
