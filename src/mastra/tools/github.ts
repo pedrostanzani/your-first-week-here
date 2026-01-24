@@ -209,9 +209,6 @@ Use this to see what engineers have been building lately and understand ongoing 
         updatedAt: z.string(),
         draft: z.boolean(),
         url: z.string(),
-        additions: z.number(),
-        deletions: z.number(),
-        changedFiles: z.number(),
       })
     ).optional(),
     totalCount: z.number().optional(),
@@ -241,9 +238,6 @@ Use this to see what engineers have been building lately and understand ongoing 
           updatedAt: pr.updated_at,
           draft: pr.draft || false,
           url: pr.html_url,
-          additions: pr.additions || 0,
-          deletions: pr.deletions || 0,
-          changedFiles: pr.changed_files || 0,
         })),
         totalCount: response.data.length,
       };

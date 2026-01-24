@@ -67,7 +67,7 @@ export async function POST(
     if (response.toolCalls && response.toolCalls.length > 0) {
       console.log("[generate-plan] 🔧 Tool calls made:", response.toolCalls.length);
       for (const call of response.toolCalls) {
-        console.log(`   - ${call.toolName}`);
+        console.log(`   - ${(call as { toolName?: string }).toolName ?? "unknown"}`);
       }
     }
 

@@ -56,7 +56,6 @@ export const OnboardingPlanSchema = z.object({
   employeeName: z.string().describe("Name of the new employee"),
   role: z.string().describe("Role of the new employee (e.g., 'Engineering', 'Sales')"),
   createdAt: z.string().describe("ISO timestamp of when plan was created"),
-  welcomeMessage: z.string().describe("Personalized welcome message"),
   days: z
     .array(OnboardingDaySchema)
     .length(5)
