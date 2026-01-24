@@ -20,8 +20,10 @@ const fraunces = Fraunces({
   weight: ["400", "500", "600", "700"],
 });
 
+const isDev = process.env.NODE_ENV !== "production";
+
 export const metadata: Metadata = {
-  title: "Your First Week Here",
+  title: isDev ? "[DEV] Your First Week Here" : "Your First Week Here",
   description: "Your personal AI assistant for starting a new job. From overwhelmed to onboarded in days, not months.",
 };
 

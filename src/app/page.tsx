@@ -8,6 +8,7 @@ import { RealtimeClock } from "@/components/realtime-clock";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -49,12 +50,12 @@ export default function Home() {
               </h1>
               <p className="text-left text-base text-[#a1a1a1]">
                 Already started? Sign in{" "}
-                <a 
-                  href="#" 
+                <Link
+                  href="/dashboard" 
                   className="text-white hover:text-white/80 transition-colors"
                 >
                   here
-                </a>
+                </Link>
                 .
               </p>
             </div>

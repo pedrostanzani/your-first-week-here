@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -344,9 +345,11 @@ export default function DashboardPage() {
       {/* Header */}
       <header className="border-b border-white/10 px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <h1 className="text-xl font-serif font-semibold text-white tracking-tight">
-            Your First Week Here
-          </h1>
+          <Link href="/">
+            <h1 className="text-xl font-serif font-semibold text-white tracking-tight hover:text-white/80 transition-colors">
+              Your First Week Here
+            </h1>
+          </Link>
           <div className="text-sm text-[#a1a1a1]">Day {currentDay} of 5</div>
         </div>
       </header>
