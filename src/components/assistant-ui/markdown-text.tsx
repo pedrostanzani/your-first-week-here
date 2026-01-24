@@ -70,7 +70,7 @@ const defaultComponents = memoizeMarkdownComponents({
   h1: ({ className, ...props }) => (
     <h1
       className={cn(
-        "aui-md-h1 mb-8 scroll-m-20 font-extrabold text-4xl tracking-tight last:mb-0",
+        "aui-md-h1 mb-6 scroll-m-20 font-serif font-bold text-2xl tracking-tight last:mb-0",
         className,
       )}
       {...props}
@@ -79,7 +79,7 @@ const defaultComponents = memoizeMarkdownComponents({
   h2: ({ className, ...props }) => (
     <h2
       className={cn(
-        "aui-md-h2 mt-8 mb-4 scroll-m-20 font-semibold text-3xl tracking-tight first:mt-0 last:mb-0",
+        "aui-md-h2 mt-6 mb-3 scroll-m-20 font-serif font-semibold text-xl tracking-tight first:mt-0 last:mb-0",
         className,
       )}
       {...props}
@@ -88,7 +88,7 @@ const defaultComponents = memoizeMarkdownComponents({
   h3: ({ className, ...props }) => (
     <h3
       className={cn(
-        "aui-md-h3 mt-6 mb-4 scroll-m-20 font-semibold text-2xl tracking-tight first:mt-0 last:mb-0",
+        "aui-md-h3 mt-5 mb-3 scroll-m-20 font-serif font-semibold text-lg tracking-tight first:mt-0 last:mb-0",
         className,
       )}
       {...props}
@@ -97,7 +97,7 @@ const defaultComponents = memoizeMarkdownComponents({
   h4: ({ className, ...props }) => (
     <h4
       className={cn(
-        "aui-md-h4 mt-6 mb-4 scroll-m-20 font-semibold text-xl tracking-tight first:mt-0 last:mb-0",
+        "aui-md-h4 mt-4 mb-2 scroll-m-20 font-serif font-semibold text-base tracking-tight first:mt-0 last:mb-0",
         className,
       )}
       {...props}
@@ -106,7 +106,7 @@ const defaultComponents = memoizeMarkdownComponents({
   h5: ({ className, ...props }) => (
     <h5
       className={cn(
-        "aui-md-h5 my-4 font-semibold text-lg first:mt-0 last:mb-0",
+        "aui-md-h5 my-3 font-serif font-semibold text-sm first:mt-0 last:mb-0",
         className,
       )}
       {...props}
@@ -115,7 +115,7 @@ const defaultComponents = memoizeMarkdownComponents({
   h6: ({ className, ...props }) => (
     <h6
       className={cn(
-        "aui-md-h6 my-4 font-semibold first:mt-0 last:mb-0",
+        "aui-md-h6 my-3 font-serif font-semibold text-sm first:mt-0 last:mb-0",
         className,
       )}
       {...props}
