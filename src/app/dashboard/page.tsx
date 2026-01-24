@@ -159,92 +159,101 @@ export default function DashboardPage() {
         )}
 
         {/* Plan Display */}
-        {plan && !isGenerating && (
-          <div className="space-y-6">
-            {/* Welcome Message */}
-            <Card className="bg-[#0a0a0a] border-white/10 p-6">
-              <p className="text-[#d4d4d4] italic">"{plan.welcomeMessage}"</p>
-            </Card>
+        {plan && !isGenerating && (() => {
+          const currentDayData = plan.days.find((d) => d.day === currentDay);
+          
+          if (!currentDayData) return null;
 
-            {/* Days */}
-            <div className="grid gap-4">
-              {plan.days.map((day) => (
-                <Card key={day.day} className="bg-[#0a0a0a] border-white/10 p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                      <Calendar className="w-4 h-4 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-white font-semibold">
-                        Day {day.day}: {day.title}
-                      </h3>
-                      <p className="text-[#a1a1a1] text-sm">{day.summary}</p>
-                    </div>
-                  </div>
-
-                  {/* Tasks */}
-                  <div className="space-y-3 ml-11">
-                    {day.tasks.map((task) => (
-                      <div
-                        key={task.id}
-                        className="flex items-start gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-                      >
-                        <div className="mt-0.5">
-                          {task.priority === "high" ? (
-                            <CheckCircle2 className="w-4 h-4 text-white/40" />
-                          ) : (
-                            <Circle className="w-4 h-4 text-white/20" />
-                          )}
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-white text-sm font-medium">
-                            {task.title}
-                          </p>
-                          <p className="text-[#a1a1a1] text-xs mt-0.5">
-                            {task.description}
-                          </p>
-                          {task.handbookArticle && (
-                            <span className="inline-block mt-2 text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded">
-                              📖 {task.handbookArticle.title}
-                            </span>
-                          )}
-                          {task.githubIssue && (
-                            <span className="inline-block mt-2 text-xs bg-green-500/20 text-green-300 px-2 py-0.5 rounded">
-                              🐛 Issue #{task.githubIssue.number}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+          return (
+            <div className="space-y-6">
+              {/* Welcome Message - only show on Day 1 */}
+              {currentDay === 1 && (
+                <Card className="bg-[#0a0a0a] border-white/10 p-6">
+                  <p className="text-[#d4d4d4] italic">"{plan.welcomeMessage}"</p>
                 </Card>
-              ))}
-            </div>
+              )}
 
-            {/* Suggested First Issue */}
-            {plan.suggestedFirstIssue && (
-              <Card className="bg-[#0a0a0a] border-green-500/30 p-6">
-                <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
-                  <span>🎯</span> Suggested First Issue
-                </h3>
-                <p className="text-white">
-                  #{plan.suggestedFirstIssue.number}: {plan.suggestedFirstIssue.title}
-                </p>
-                <p className="text-[#a1a1a1] text-sm mt-1">
-                  {plan.suggestedFirstIssue.reason}
-                </p>
-                <a
-                  href={plan.suggestedFirstIssue.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-3 text-sm text-blue-400 hover:text-blue-300"
-                >
-                  View on GitHub →
-                </a>
+              {/* Current Day */}
+              <Card className="bg-[#0a0a0a] border-white/10 p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                    <Calendar className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold">
+                      Day {currentDayData.day}: {currentDayData.title}
+                    </h3>
+                    <p className="text-[#a1a1a1] text-sm">{currentDayData.summary}</p>
+                  </div>
+                </div>
+
+                {/* Tasks */}
+                <div className="space-y-3 ml-11">
+                  {currentDayData.tasks.map((task) => (
+                    <div
+                      key={task.id}
+                      className="flex items-start gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                    >
+                      <div className="mt-0.5">
+                        {task.priority === "high" ? (
+                          <CheckCircle2 className="w-4 h-4 text-white/40" />
+                        ) : (
+                          <Circle className="w-4 h-4 text-white/20" />
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-white text-sm font-medium">
+                          {task.title}
+                        </p>
+                        <p className="text-[#a1a1a1] text-xs mt-0.5">
+                          {task.description}
+                        </p>
+                        {task.handbookArticle && (
+                          <span className="inline-block mt-2 text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded">
+                            📖 {task.handbookArticle.title}
+                          </span>
+                        )}
+                        {task.githubIssue && (
+                          <span className="inline-block mt-2 text-xs bg-green-500/20 text-green-300 px-2 py-0.5 rounded">
+                            🐛 Issue #{task.githubIssue.number}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </Card>
-            )}
-          </div>
-        )}
+
+              {/* Suggested First Issue - show on Day 4 or 5 for engineers */}
+              {plan.suggestedFirstIssue && currentDay >= 4 && (
+                <Card className="bg-[#0a0a0a] border-green-500/30 p-6">
+                  <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                    <span>🎯</span> Suggested First Issue
+                  </h3>
+                  <p className="text-white">
+                    #{plan.suggestedFirstIssue.number}: {plan.suggestedFirstIssue.title}
+                  </p>
+                  <p className="text-[#a1a1a1] text-sm mt-1">
+                    {plan.suggestedFirstIssue.reason}
+                  </p>
+                  <a
+                    href={plan.suggestedFirstIssue.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-3 text-sm text-blue-400 hover:text-blue-300"
+                  >
+                    View on GitHub →
+                  </a>
+                </Card>
+              )}
+
+              {/* Day Navigation Hint */}
+              <p className="text-center text-[#a1a1a1] text-sm">
+                Use the menu in the bottom right to navigate between days
+              </p>
+            </div>
+          );
+        })()}
       </div>
 
       {/* Floating Action Button */}
