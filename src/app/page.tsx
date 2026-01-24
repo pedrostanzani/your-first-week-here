@@ -93,6 +93,14 @@ export default function Home() {
             </div>
           </div>
         </div>
+      <footer className="flex justify-center py-8 px-4 z-50">
+        <a
+          href="/why"
+          className="text-xs text-[#a1a1a1] hover:text-white transition-colors"
+        >
+          Here's why.
+        </a>
+      </footer>
       </div>
 
       <GetStartedModal
