@@ -408,8 +408,8 @@ export default function DashboardPage() {
           </Card>
         )}
 
-        {/* Progress Card - shows during generation and stays visible after */}
-        {progressSteps.length > 0 && (
+        {/* Progress Card - shows during generation and on day 1 only */}
+        {progressSteps.length > 0 && (isGenerating || currentDay === 1) && (
           <div className="space-y-4 mb-6">
             <Card className="bg-[#0a0a0a] border-white/10 p-6 gap-2">
               <div className="flex items-center gap-3 mb-6">
