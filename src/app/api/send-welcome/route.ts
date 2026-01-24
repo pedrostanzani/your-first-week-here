@@ -42,12 +42,8 @@ export async function POST(
 
     const firstName = name?.trim() || "there";
     
-    // Get the base URL for absolute image paths in emails
-    const baseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL ||
-      process.env.VERCEL_URL
-        ? `https://${process.env.VERCEL_URL}`
-        : "http://localhost:3000";
+    // Base URL for absolute image paths in emails
+    const baseUrl = "https://first-week-here.vercel.app";
 
     // Send email using Resend with React Email template
     const { data, error } = await resend.emails.send({

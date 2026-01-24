@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -161,6 +162,7 @@ export default function DashboardPage() {
     progressSteps,
     goToNextDay,
     goToPreviousDay,
+    setCurrentDay,
     toggleTaskCompletion,
     setPlan,
     setIsGenerating,
@@ -356,6 +358,27 @@ export default function DashboardPage() {
             Let's get you up to speed. Here's your personalized onboarding plan.
           </p>
         </div>
+
+        {/* Day Tabs - only show when plan exists */}
+        {plan && !isGenerating && (
+          <Tabs
+            value={String(currentDay)}
+            onValueChange={(value) => setCurrentDay(Number(value))}
+            className="mb-6"
+          >
+            <TabsList className="bg-white/5 border border-white/10">
+              {[1, 2, 3, 4, 5].map((day) => (
+                <TabsTrigger
+                  key={day}
+                  value={String(day)}
+                  className="data-[state=active]:bg-white data-[state=active]:text-black text-white/60"
+                >
+                  Day {day}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+        )}
 
         {/* Generate Plan Button (if no plan yet) */}
         {!plan && !isGenerating && (
@@ -675,10 +698,6 @@ export default function DashboardPage() {
                   </Card>
                 )}
 
-                {/* Day Navigation Hint */}
-                <p className="text-center text-[#a1a1a1] text-sm">
-                  Use the menu in the bottom right to navigate between days
-                </p>
               </div>
             );
           })()}
