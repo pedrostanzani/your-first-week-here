@@ -12,17 +12,25 @@ import { ArrowRight } from "lucide-react";
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const handleSubmit = async (data: { email: string; company?: string }) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+  const handleSubmit = async (data: { email: string; name?: string }) => {
+    const response = await fetch("/api/send-welcome", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-    // In a real app, this would call /api/onboard
-    console.log("Onboarding data:", data);
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error("Failed to send email");
+    }
 
     // Close modal and show success toast
     setModalOpen(false);
-    toast.success("Check your email!", {
-      description: "Your onboarding buddy is reaching out.",
+    toast.success("Check your inbox!", {
+      description: "Your onboarding buddy just sent you an email.",
     });
   };
 
@@ -71,7 +79,7 @@ export default function Home() {
               <div className="flex relative z-10 flex-col gap-4 items-start">
                 <p className="font-medium text-white text-[15px] leading-[140%] max-w-[42ch] tracking-[-0.15px]">
                   Welcome to Resend! We'll get you set up in no time. Meet
-                  Oscar, our AI onboarding buddy.
+                  Ray, your AI onboarding buddy.
                 </p>
                 <Button
                   onClick={() => setModalOpen(true)}

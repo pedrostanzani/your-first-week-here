@@ -16,7 +16,7 @@ import { Loader2 } from "lucide-react";
 interface GetStartedModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSubmit: (data: { email: string; company?: string }) => Promise<void>;
+  onSubmit: (data: { email: string; name?: string }) => Promise<void>;
 }
 
 export function GetStartedModal({
@@ -25,7 +25,7 @@ export function GetStartedModal({
   onSubmit,
 }: GetStartedModalProps) {
   const [email, setEmail] = useState("");
-  const [company, setCompany] = useState("Resend");
+  const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -41,11 +41,11 @@ export function GetStartedModal({
 
     setIsLoading(true);
     try {
-      await onSubmit({ email, company: company || undefined });
+      await onSubmit({ email, name: name.trim() || undefined });
       setEmail("");
-      setCompany("Resend");
+      setName("");
     } catch {
-      setError("Something went wrong. Please try again.");
+      setError("Oops! Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -59,12 +59,27 @@ export function GetStartedModal({
             Let&apos;s get you set up...
           </DialogTitle>
           <DialogDescription className="text-[#a1a1a1]">
-            It's a joy to have you here! Enter your details and Oscar will get in touch to start your
+            It's a joy to have you here! Enter your details and Ray will get in touch to start your
             onboarding journey.
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-5 mt-4">
+          <div className="space-y-2">
+            <Label htmlFor="name" className="text-white/80">
+              How would you like us to call you?
+            </Label>
+            <Input
+              id="name"
+              type="text"
+              placeholder="Your preferred name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-white/20 focus-visible:border-white/20"
+              disabled={isLoading}
+            />
+          </div>
+
           <div className="space-y-2">
             <Label htmlFor="email" className="text-white/80">
               Email address
