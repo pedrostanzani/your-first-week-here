@@ -24,6 +24,11 @@ export interface ProgressStep {
   result?: ToolResultSummary | null;
 }
 
+export interface DayCompletion {
+  feedback: string;
+  completedAt: string;
+}
+
 interface OnboardingState {
   // User info
   userName: string | null;
@@ -36,6 +41,9 @@ interface OnboardingState {
 
   // Task completion tracking (Set of task IDs)
   completedTasks: string[];
+
+  // Day completion tracking (feedback per day)
+  dayCompletions: Record<number, DayCompletion>;
 
   // Loading states
   isGenerating: boolean;
@@ -55,6 +63,9 @@ interface OnboardingState {
   goToPreviousDay: () => void;
   toggleTaskCompletion: (taskId: string) => void;
   isTaskCompleted: (taskId: string) => boolean;
+  completeDay: (day: number, feedback: string) => void;
+  isDayCompleted: (day: number) => boolean;
+  getDayFeedback: (day: number) => string | null;
   setIsGenerating: (loading: boolean) => void;
   setError: (error: string | null) => void;
   addProgressStep: (step: Omit<ProgressStep, "id" | "timestamp">) => void;
@@ -71,6 +82,7 @@ const initialState = {
   plan: null,
   currentDay: 1,
   completedTasks: [] as string[],
+  dayCompletions: {} as Record<number, DayCompletion>,
   isGenerating: false,
   error: null,
   progressSteps: [] as ProgressStep[],
@@ -120,6 +132,26 @@ export const useOnboardingStore = create<OnboardingState>()(
 
       isTaskCompleted: (taskId) => {
         return get().completedTasks.includes(taskId);
+      },
+
+      completeDay: (day, feedback) => {
+        set((state) => ({
+          dayCompletions: {
+            ...state.dayCompletions,
+            [day]: {
+              feedback,
+              completedAt: new Date().toISOString(),
+            },
+          },
+        }));
+      },
+
+      isDayCompleted: (day) => {
+        return day in get().dayCompletions;
+      },
+
+      getDayFeedback: (day) => {
+        return get().dayCompletions[day]?.feedback ?? null;
       },
 
       setIsGenerating: (loading) => set({ isGenerating: loading }),

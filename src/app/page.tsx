@@ -1,35 +1,29 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { GetStartedModal } from "@/components/get-started-modal";
 import { RealtimeClock } from "@/components/realtime-clock";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = async (data: { email: string; name?: string }) => {
-    const response = await fetch("/api/send-welcome", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+  const handleSubmit = async (data: {
+    email: string;
+    name?: string;
+    role?: string;
+  }) => {
+    // Build query params for the dashboard
+    const params = new URLSearchParams();
+    if (data.name) params.set("name", data.name);
+    if (data.role) params.set("role", data.role);
 
-    const result = await response.json();
-
-    if (!response.ok || !result.success) {
-      throw new Error("Failed to send email");
-    }
-
-    // Close modal and show success toast
-    setModalOpen(false);
-    toast.success("Check your inbox!", {
-      description: "Your onboarding buddy just sent you an email.",
-    });
+    // Navigate to dashboard to generate the onboarding plan
+    const queryString = params.toString();
+    router.push(`/dashboard${queryString ? `?${queryString}` : ""}`);
   };
 
   return (

@@ -23,7 +23,11 @@ import { Loader2 } from "lucide-react";
 interface GetStartedModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSubmit: (data: { email: string; name?: string; role?: string }) => Promise<void>;
+  onSubmit: (data: {
+    email: string;
+    name?: string;
+    role?: string;
+  }) => Promise<void>;
 }
 
 export function GetStartedModal({
@@ -49,10 +53,10 @@ export function GetStartedModal({
 
     setIsLoading(true);
     try {
-      await onSubmit({ 
-        email, 
+      await onSubmit({
+        email,
         name: name.trim() || undefined,
-        role: role || undefined
+        role: role || undefined,
       });
       setEmail("");
       setName("");
@@ -72,7 +76,7 @@ export function GetStartedModal({
             Let&apos;s get you set up...
           </DialogTitle>
           <DialogDescription className="text-[#a1a1a1]">
-            It's a joy to have you here! Enter your details and Ray will get in touch to start your
+            It's a joy to have you here! Enter your details to start your
             onboarding journey.
           </DialogDescription>
         </DialogHeader>
@@ -113,23 +117,35 @@ export function GetStartedModal({
               What role are you joining in?
             </Label>
             <Select value={role} onValueChange={setRole} disabled={isLoading}>
-              <SelectTrigger 
+              <SelectTrigger
                 id="role"
                 className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:ring-white/20 focus:border-white/20"
               >
                 <SelectValue placeholder="Select your role" />
               </SelectTrigger>
               <SelectContent className="bg-[#1a1a1a] border-white/10">
-                <SelectItem value="Engineering" className="text-white focus:bg-white/10 focus:text-white">
+                <SelectItem
+                  value="Engineering"
+                  className="text-white focus:bg-white/10 focus:text-white"
+                >
                   Engineering
                 </SelectItem>
-                <SelectItem value="Design" className="text-white focus:bg-white/10 focus:text-white">
+                <SelectItem
+                  value="Design"
+                  className="text-white focus:bg-white/10 focus:text-white"
+                >
                   Design
                 </SelectItem>
-                <SelectItem value="Sales" className="text-white focus:bg-white/10 focus:text-white">
+                <SelectItem
+                  value="Sales"
+                  className="text-white focus:bg-white/10 focus:text-white"
+                >
                   Sales
                 </SelectItem>
-                <SelectItem value="Operations" className="text-white focus:bg-white/10 focus:text-white">
+                <SelectItem
+                  value="Operations"
+                  className="text-white focus:bg-white/10 focus:text-white"
+                >
                   Operations
                 </SelectItem>
               </SelectContent>
