@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -167,7 +167,7 @@ function ToolResultDisplay({ result }: { result: ToolResultSummary }) {
   }
 }
 
-export default function DashboardPage() {
+function DashboardContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const {
@@ -969,6 +969,33 @@ export default function DashboardPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+    </main>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<DashboardSkeleton />}>
+      <DashboardContent />
+    </Suspense>
+  );
+}
+
+function DashboardSkeleton() {
+  return (
+    <main className="min-h-screen bg-black">
+      <header className="border-b border-white/10 px-6 py-4">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <div className="h-7 w-48 bg-white/10 rounded animate-pulse" />
+          <div className="h-5 w-24 bg-white/10 rounded animate-pulse" />
+        </div>
+      </header>
+      <div className="max-w-6xl mx-auto px-6 py-8">
+        <div className="mb-8">
+          <div className="h-9 w-64 bg-white/10 rounded animate-pulse mb-2" />
+          <div className="h-5 w-96 bg-white/10 rounded animate-pulse" />
+        </div>
+      </div>
     </main>
   );
 }
