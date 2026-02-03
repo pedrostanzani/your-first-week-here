@@ -1,14 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { HeroSection } from "@/components/hero-section";
-import { CTACard } from "@/components/cta-card";
 import { GetStartedModal } from "@/components/get-started-modal";
 import { RealtimeClock } from "@/components/realtime-clock";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -49,14 +46,7 @@ export default function Home() {
                 Your First Week Here
               </h1>
               <p className="text-left text-base text-[#a1a1a1]">
-                Already started? Sign in{" "}
-                <Link
-                  href="/dashboard" 
-                  className="text-white hover:text-white/80 transition-colors"
-                >
-                  here
-                </Link>
-                .
+                Generate a personalized 5-day onboarding plan.
               </p>
             </div>
             <div>
@@ -79,8 +69,8 @@ export default function Home() {
             <div className="p-5 lg:p-8 lg:pr-6 rounded-2xl backdrop-blur-[15px] border border-white/20 shadow-[0_2px_6px_0_rgba(0,0,0,0.15)] bg-gradient-to-r from-black/12 via-black/7 to-black/7 bg-clip-padding max-w-[500px]">
               <div className="flex relative z-10 flex-col gap-4 items-start">
                 <p className="font-medium text-white text-[15px] leading-[140%] max-w-[42ch] tracking-[-0.15px]">
-                  Welcome to Resend! We'll get you set up in no time. Meet
-                  Ray, your AI onboarding buddy.
+                  Welcome! We'll get you set up in no time. Meet your AI
+                  onboarding buddy.
                 </p>
                 <Button
                   onClick={() => setModalOpen(true)}
@@ -94,14 +84,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-      <footer className="flex justify-center py-8 px-4 z-50">
-        <a
-          href="/why"
-          className="text-xs text-[#a1a1a1] hover:text-white transition-colors"
-        >
-          Here's why.
-        </a>
-      </footer>
       </div>
 
       <GetStartedModal
