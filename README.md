@@ -8,7 +8,7 @@ An AI-powered onboarding assistant that generates personalized 5-day onboarding 
 
 ```bash
 git clone https://github.com/your-username/oscar-ai.git
-cd oscar-ai
+cd your-first-week-here
 ```
 
 2. Install dependencies:
